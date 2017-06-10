@@ -1,0 +1,132 @@
+Visualforce Page:
+
+<apex:page controller="LightningLogicController">
+<style>
+            .hide{
+                visibility:hidden;
+                display:none;
+                height:0;
+                width:0;
+            }
+       
+            #btnNew{
+                background-color:red;
+                border-radius:5px;
+                color:white;
+                text-decoration:none;
+                font-weight:bold;
+                padding:7px;
+                margin:7px 0 7px 0;
+                display:block;
+                width:200px;
+                text-align:center;
+            }
+       
+            #btnNew:hover{
+                opacity:0.5;
+            }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <h1>
+        List of Accounts
+    </h1>
+    <br/>
+    <a href="/001/e?acc2=Pre-Populated Account Name" target="_blank" class="classicOnly" id="btnNew">New Pre-Populated Account</a>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>       
+        <apex:repeat value="{!liAcc}" var="a">
+            <tr>
+                <td>{!a.Name}</td>
+                <td>
+                    <a href="#" data-id="{!a.Id}" target="_blank" class="dynamicViewLink">Details</a>   
+                    <a href="#" data-id="{!a.Id}" target="_blank" class="dynamicEditLink">Edit</a>
+                </td>
+            </tr>
+        </apex:repeat>
+    </table>
+    <script>
+        var $j = jQuery.noConflict();
+        var theme = '{!$User.UIThemeDisplayed}';                   
+        $j(document).on('ready', function(){
+            if(theme === 'Theme4d'){
+                $j('.notLightning').addClass('hide');
+                $j('.mobileOnly').addClass('hide');
+                $j('.classicOnly').addClass('hide');
+            }
+            else if(theme === 'Theme4t'){
+                $j('.notMobile').addClass('hide');
+                $j('.lightningOnly').addClass('hide');
+                $j('.classicOnly').addClass('hide');
+                $j('a').removeAttr('target');
+            }
+            else if(theme === 'Theme3' || theme === 'Theme2'){
+                $j('.notClassic').addClass('hide');
+                $j('.lightningOnly').addClass('hide');
+                $j('.mobileOnly').addClass('hide');
+            }
+            bindViewLinks();
+            bindEditLinks();
+        });
+               
+        function bindViewLinks(){
+            var $j = jQuery.noConflict();
+            lightningBase = '/one/one.app#/sObject/'; // + /action
+            classicBase = '/';
+            mobileBase = '/one/one.app#/sObject/'; // + /action
+            var link = '';
+            $j('.dynamicViewLink').each(function(){
+                link = '';
+                if(theme === 'Theme4d'){
+                    link = lightningBase + $j(this).data('id') + '/view';
+                }
+                else if(theme === 'Theme4t'){
+                    link = mobileBase + $j(this).data('id')  + '/view';
+                    $j('a').removeAttr('target');
+                }
+                    else if(theme === 'Theme3' || theme === 'Theme2'){
+                        link = classicBase + $j(this).data('id');
+                    }
+                $j(this).prop('href', link);
+            });
+        }
+           
+        function bindEditLinks(){
+            var $j = jQuery.noConflict();
+            lightningBase = '/one/one.app#/sObject/'; // + /action
+            classicBase = '/';
+            mobileBase = '/one/one.app#/sObject/'; // + /action
+            var link = '';
+            $j('.dynamicEditLink').each(function(){
+                link = '';
+                if(theme === 'Theme4d'){
+                    link = lightningBase + $j(this).data('id') + '/edit';
+                }
+                else if(theme === 'Theme4t'){
+                    link = mobileBase + $j(this).data('id')  + '/edit';
+                    $j('a').removeAttr('target');
+                }
+                else if(theme === 'Theme3' || theme === 'Theme2'){
+                    link = classicBase + $j(this).data('id') + '/e';
+                }
+                $j(this).prop('href', link);
+            });
+        }
+    </script>
+</apex:page>                
+                                
+                            
+Controller:
+                                
+public with sharing class LightningLogicController {
+    list<account> liAcc;
+    public LightningLogicController(){
+        liAcc = [select id, name from account limit 20];
+    }
+   
+    public list<account> getliAcc(){
+        return liAcc;
+    }
+}
