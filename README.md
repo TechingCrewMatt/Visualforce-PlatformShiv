@@ -16,11 +16,11 @@ Instructions:
 5. Access the Visualforce Global Variable to determine which platform is in use and initialize the shiv:
                                                         
 &lt;script><br/>
-    var $j = jQuery.noConflict();<br/>
-    var theme = '{!$User.UIThemeDisplayed}'; <br/>
-    $j(document).ready(function () {<br/>
-        PlatformShivJS.init(theme);<br/>
-    });<br/>
+    &nbsp;&nbsp;var $j = jQuery.noConflict();<br/>
+    &nbsp;&nbsp;var theme = '{!$User.UIThemeDisplayed}'; <br/>
+    &nbsp;&nbsp;$j(document).ready(function () {<br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;    PlatformShivJS.init(theme);<br/>
+    &nbsp;&nbsp;});<br/>
 &lt;/script><br/>
                                                         
                                                     
