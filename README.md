@@ -13,7 +13,7 @@ Instructions:
 &lt;link href="{!URLFOR($Resource.PlatformShivJSBundle, 'PlatformShivJS.css')}" rel="stylesheet"/><br/>
                                                         
                                                     
-5.Access the Visualforce Global Variable to determine which platform is in use and initialize the shiv:
+5. Access the Visualforce Global Variable to determine which platform is in use and initialize the shiv:
                                                         
 &lt;script><br/>
     var $j = jQuery.noConflict();<br/>
