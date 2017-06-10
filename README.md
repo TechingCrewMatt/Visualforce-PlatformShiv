@@ -8,20 +8,20 @@ Instructions:
 3. Create a new Visualforce page.
 4. Include a reference to the JavaScript and CSS files you downloaded:
                                                         
-&lt;apex:includeScript value="{!URLFOR($Resource.PlatformShivJSBundle, 'jquery.js')}"/>
-&lt;apex:includeScript value="{!URLFOR($Resource.PlatformShivJSBundle, 'PlatformShivJS.js')}"/>
-&lt;link href="{!URLFOR($Resource.PlatformShivJSBundle, 'PlatformShivJS.css')}" rel="stylesheet"/>
+&lt;apex:includeScript value="{!URLFOR($Resource.PlatformShivJSBundle, 'jquery.js')}"/><br/>
+&lt;apex:includeScript value="{!URLFOR($Resource.PlatformShivJSBundle, 'PlatformShivJS.js')}"/><br/>
+&lt;link href="{!URLFOR($Resource.PlatformShivJSBundle, 'PlatformShivJS.css')}" rel="stylesheet"/><br/>
                                                         
                                                     
 5.Access the Visualforce Global Variable to determine which platform is in use and initialize the shiv:
                                                         
-&lt;script>
-    var $j = jQuery.noConflict();
-    var theme = '{!$User.UIThemeDisplayed}'; 
-    $j(document).ready(function () {
-        PlatformShivJS.init(theme);
-    });
-&lt;/script>
+&lt;script><br/>
+    var $j = jQuery.noConflict();<br/>
+    var theme = '{!$User.UIThemeDisplayed}'; <br/>
+    $j(document).ready(function () {<br/>
+        PlatformShivJS.init(theme);<br/>
+    });<br/>
+&lt;/script><br/>
                                                         
                                                     
 <b>To create a link to a record detail page:</b>
