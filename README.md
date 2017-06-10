@@ -36,7 +36,7 @@ Use a placeholder "href" attribute. The shiv will populate this based on the pla
                                                     
 &lt;a href="#" data-id="{!a.Id}" target="_blank" class="dynamicEditLink">Edit&lt;/a>
                                                                            
-<b>To include/exclude elemnts based on platform:</b>
+<b>To include/exclude elements based on platform:</b>
 
 For instance, if you want to pre-polulate an Account Name when creating the record. This was done with URL parameters in Salesforce Classic, but Actions are used in Salesforce1 and Lightning Experience. You can use the "classicOnly" class on such an element and the JavaScript will hide it for other platforms.
 
