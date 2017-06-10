@@ -3,7 +3,7 @@ Easily create Visualforce pages that are compatible with Salesforce Classic, Sal
 
 Instructions:
 
-1. Download the zipped resources.
+1. Download the PlatformShivJSBundle.zip.
 2. Create a Static Resource named PlatformShivJSBundle
 3. Create a new Visualforce page.
 4. Include a reference to the JavaScript and CSS files you downloaded:
