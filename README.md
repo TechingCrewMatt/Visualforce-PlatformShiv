@@ -27,9 +27,9 @@ To create a link to a record detail page:
 
 Use a placeholder "href" attribute. The shiv will populate this based on the platform in use. Add the record ID in the "data-id" attribute and use the class "dynamicViewLink":
 
-                                                    
+<code>                                                   
 <a href="#" data-id="{!a.Id}" target="_blank" class="dynamicViewLink">Details</a>
-                                                    
+</code>                                                    
                                                 
 To create a link to edit a record:
 
