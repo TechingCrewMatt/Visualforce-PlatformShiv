@@ -7,9 +7,9 @@ Download the package from the AppExchange.
 Create a new Visualforce page.
 Include a reference to the JavaScript and CSS files you downloaded:
                                                         
-<apex:includeScript value="{!URLFOR($Resource.PlatformShivJSBundle, 'jquery.js')}"/>
-<apex:includeScript value="{!URLFOR($Resource.PlatformShivJSBundle, 'PlatformShivJS.js')}"/>
-<link href="{!URLFOR($Resource.PlatformShivJSBundle, 'PlatformShivJS.css')}" rel="stylesheet"/>
+&lt;apex:includeScript value="{!URLFOR($Resource.PlatformShivJSBundle, 'jquery.js')}"/>
+&lt;apex:includeScript value="{!URLFOR($Resource.PlatformShivJSBundle, 'PlatformShivJS.js')}"/>
+&lt;link href="{!URLFOR($Resource.PlatformShivJSBundle, 'PlatformShivJS.css')}" rel="stylesheet"/>
                                                         
                                                     
 Access the Visualforce Global Variable to determine which platform is in use and initialize the shiv:
