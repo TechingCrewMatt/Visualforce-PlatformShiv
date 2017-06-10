@@ -1,0 +1,10 @@
+public class LightningLogicController {
+    list<account> liAcc;
+    public LightningLogicController(){
+        liAcc = [select id, name from account limit 20];
+    }
+    
+    public list<account> getliAcc(){
+        return liAcc;
+    }
+}
