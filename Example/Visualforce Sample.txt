@@ -1,73 +1,75 @@
-<apex:page controller="LightningLogicController" standardStylesheets="false">
-    <style>
-        .hide{
-            visibility:hidden;
-            display:none;
-            height:0;
-            width:0;
-        }
-        
+<apex:page controller="SamplePageController" standardStylesheets="false">
+    <apex:includeScript value="{!URLFOR($Resource.PlatformShivJSBundle, 'jquery.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.PlatformShivJSBundle, 'PlatformShivJS.js')}"/>
+    <link href="{!URLFOR($Resource.PlatformShivJSBundle, 'PlatformShivJS.css')}" rel="stylesheet"/>
+    <script>
+        var $j = jQuery.noConflict();
+        var theme = '{!$User.UIThemeDisplayed}'; 
+        $j(document).ready(function () {
+            PlatformShivJS.init(theme);
+        });
+    </script>
+    <style>      
         table{
-        	min-width:50%;
+            min-width:50%;
         }
         
         #btnNew{
-        	background-color:red;
-        	border-radius:5px;
-        	color:white;
-        	text-decoration:none;
-        	font-weight:bold;
-        	padding:7px;
-        	margin:7px 0 7px 0;
-        	display:block;
-        	width:200px;
-        	text-align:center;
+            background-color:red;
+            border-radius:5px;
+            color:white;
+            text-decoration:none;
+            font-weight:bold;
+            padding:7px;
+            margin:7px 0 7px 0;
+            display:block;
+            width:200px;
+            text-align:center;
         }
         
         #btnNew:hover{
-        	opacity:0.5;
+            opacity:0.5;
         }
         
         .btnX{
-        	text-decoration:none!important;
-        	background-color:blue!important;
-        	color:white!important;
+            text-decoration:none!important;
+            background-color:blue!important;
+            color:white!important;
             font-weight:bold;
-        	display:inline-block;
-        	padding:3px;
-        	border:1px solid blue;
-        	border-radius:2px;
+            display:inline-block;
+            padding:3px;
+            border:1px solid blue;
+            border-radius:2px;
         }
         
         .btnY{
-        	text-decoration:none!important;
-        	background-color:white!important;
-        	color:blue!important;
+            text-decoration:none!important;
+            background-color:white!important;
+            color:blue!important;
             font-weight:bold;
-        	display:inline-block;
-        	padding:3px;
+            display:inline-block;
+            padding:3px;
             border:1px solid blue;
-        	border-radius:2px;
+            border-radius:2px;
         }
         
         .btnX:hover, btnY:hover{
-        	opacity:.5;
+            opacity:.5;
         }
     </style>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <div id="code"></div>
     <h1>
-		List of Accounts
+        List of Accounts
     </h1>
     <br/>
     <a href="/001/e?acc2=Pre-Populated Account Name" target="_blank" class="classicOnly" id="btnNew">New Pre-Populated Account</a>
-	<table>
-		<tr>
+    <table>
+        <tr>
             <th>Name</th>
             <th>Actions</th>
         </tr>        
         <apex:repeat value="{!liAcc}" var="a">
-        	<tr>
+            <tr>
                 <td>{!a.Name}</td>
                 <td>
                     <a href="#" data-id="{!a.Id}" target="_blank" class="dynamicViewLink btnX">Details</a>&nbsp; &nbsp; 
@@ -76,207 +78,4 @@
             </tr>
         </apex:repeat>
     </table>
-    <pre>                
-        <code>
-        &lt;apex:page controller=&quot;LightningLogicController&quot;>
-        &lt;style>
-        .hide{
-            visibility:hidden;
-            display:none;
-            height:0;
-            width:0;
-        }
-        
-        #btnNew{
-        	background-color:red;
-        	border-radius:5px;
-        	color:white;
-        	text-decoration:none;
-        	font-weight:bold;
-        	padding:7px;
-        	margin:7px 0 7px 0;
-        	display:block;
-        	width:200px;
-        	text-align:center;
-        }
-        
-        #btnNew:hover{
-        	opacity:0.5;
-        }
-    &lt;/style>
-    &lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js&quot;>&lt;/script>
-    &lt;div id=&quot;code&quot;>&lt;/div>
-    &lt;h1>
-		List of Accounts
-    &lt;/h1>
-    &lt;br/>
-    &lt;a href=&quot;/001/e?acc2=Pre-Populated Account Name&quot; target=&quot;_blank&quot; class=&quot;classicOnly&quot; id=&quot;btnNew&quot;>New Pre-Populated Account&lt;/a>
-	&lt;table>
-		&lt;tr>
-            &lt;th>Name&lt;/th>
-            &lt;th>Actions&lt;/th>
-        &lt;/tr>        
-        &lt;apex:repeat value=&quot;{&#033;liAcc}&quot; var=&quot;a&quot;>
-        	&lt;tr>
-                &lt;td>{&#033;a.Name}&lt;/td>
-                &lt;td>
-                    &lt;a href=&quot;#&quot; data-id=&quot;{&#033;a.Id}&quot; target=&quot;_blank&quot; class=&quot;dynamicViewLink&quot;>Details&lt;/a>&nbsp; &nbsp; 
-                    &lt;a href=&quot;#&quot; data-id=&quot;{&#033;a.Id}&quot; target=&quot;_blank&quot; class=&quot;dynamicEditLink&quot;>Edit&lt;/a>
-                &lt;/td>
-            &lt;/tr>
-        &lt;/apex:repeat>
-    &lt;/table>
-	&lt;script>
-        var $j = jQuery.noConflict();
-        var theme = &#039;{&#033;$User.UIThemeDisplayed}&#039;;                    
-        $j(document).on(&#039;ready&#039;, function(){
-            if(theme === &#039;Theme4d&#039;){
-                $j(&#039;.notLightning&#039;).addClass(&#039;hide&#039;);
-                $j(&#039;.mobileOnly&#039;).addClass(&#039;hide&#039;);
-                $j(&#039;.classicOnly&#039;).addClass(&#039;hide&#039;);
-            }
-            else if(theme === &#039;Theme4t&#039;){
-                $j(&#039;.notMobile&#039;).addClass(&#039;hide&#039;);
-                $j(&#039;.lightningOnly&#039;).addClass(&#039;hide&#039;);
-                $j(&#039;.classicOnly&#039;).addClass(&#039;hide&#039;);
-                $j(&#039;a&#039;).removeAttr(&#039;target&#039;);
-            }
-            else if(theme === &#039;Theme3&#039; || theme === &#039;Theme2&#039;){
-                $j(&#039;.notClassic&#039;).addClass(&#039;hide&#039;); 
-                $j(&#039;.lightningOnly&#039;).addClass(&#039;hide&#039;);
-                $j(&#039;.mobileOnly&#039;).addClass(&#039;hide&#039;);
-            }
-            bindViewLinks();
-            bindEditLinks();
-        });
-                
-        function bindViewLinks(){
-            var $j = jQuery.noConflict();
-            lightningBase = &#039;/one/one.app#/sObject/&#039;; // + /action
-            classicBase = &#039;/&#039;;
-            mobileBase = &#039;/one/one.app#/sObject/&#039;; // + /action
-            var link = &#039;&#039;;
-            $j(&#039;.dynamicViewLink&#039;).each(function(){
-                link = &#039;&#039;;
-                if(theme === &#039;Theme4d&#039;){
-                    link = lightningBase + $j(this).data(&#039;id&#039;) + &#039;/view&#039;;
-                }
-                else if(theme === &#039;Theme4t&#039;){
-                    link = mobileBase + $j(this).data(&#039;id&#039;)  + &#039;/view&#039;;
-                    $j(&#039;a&#039;).removeAttr(&#039;target&#039;);
-                }
-                    else if(theme === &#039;Theme3&#039; || theme === &#039;Theme2&#039;){
-                        link = classicBase + $j(this).data(&#039;id&#039;);
-                    }
-                $j(this).prop(&#039;href&#039;, link);
-            });
-        }
-            
-        function bindEditLinks(){
-            var $j = jQuery.noConflict();
-            lightningBase = &#039;/one/one.app#/sObject/&#039;; // + /action
-            classicBase = &#039;/&#039;;
-            mobileBase = &#039;/one/one.app#/sObject/&#039;; // + /action
-            var link = &#039;&#039;;
-            $j(&#039;.dynamicEditLink&#039;).each(function(){
-                link = &#039;&#039;;
-                if(theme === &#039;Theme4d&#039;){
-                    link = lightningBase + $j(this).data(&#039;id&#039;) + &#039;/edit&#039;;
-                }
-                else if(theme === &#039;Theme4t&#039;){
-                    link = mobileBase + $j(this).data(&#039;id&#039;)  + &#039;/edit&#039;;
-                    $j(&#039;a&#039;).removeAttr(&#039;target&#039;);
-                }
-                else if(theme === &#039;Theme3&#039; || theme === &#039;Theme2&#039;){
-                    link = classicBase + $j(this).data(&#039;id&#039;) + &#039;/e&#039;;
-                }
-                $j(this).prop(&#039;href&#039;, link);
-            });
-        }
-    &lt;/script>
-&lt;/apex:page>                
-        </code>
-    </pre>
-	<pre>
-    	<code>
-    		public class LightningLogicController {
-    			list&lt;account> liAcc;
-    			public LightningLogicController(){
-        			liAcc = [select id, name from account limit 20];
-    			}
-    
-    			public list&lt;account> getliAcc(){
-        			return liAcc;
-    			}
-			}
-    	</code>
-    </pre>
-	<script>
-        var $j = jQuery.noConflict();
-        var theme = '{!$User.UIThemeDisplayed}';                    
-        $j(document).on('ready', function(){
-            if(theme === 'Theme4d'){
-                $j('.notLightning').addClass('hide');
-                $j('.mobileOnly').addClass('hide');
-                $j('.classicOnly').addClass('hide');
-            }
-            else if(theme === 'Theme4t'){
-                $j('.notMobile').addClass('hide');
-                $j('.lightningOnly').addClass('hide');
-                $j('.classicOnly').addClass('hide');
-                $j('a').removeAttr('target');
-            }
-            else if(theme === 'Theme3' || theme === 'Theme2'){
-                $j('.notClassic').addClass('hide'); 
-                $j('.lightningOnly').addClass('hide');
-                $j('.mobileOnly').addClass('hide');
-            }
-            bindViewLinks();
-            bindEditLinks();
-        });
-                
-        function bindViewLinks(){
-            var $j = jQuery.noConflict();
-            lightningBase = '/one/one.app#/sObject/'; // + /action
-            classicBase = '/';
-            mobileBase = '/one/one.app#/sObject/'; // + /action
-            var link = '';
-            $j('.dynamicViewLink').each(function(){
-                link = '';
-                if(theme === 'Theme4d'){
-                    link = lightningBase + $j(this).data('id') + '/view';
-                }
-                else if(theme === 'Theme4t'){
-                    link = mobileBase + $j(this).data('id')  + '/view';
-                    $j('a').removeAttr('target');
-                }
-                    else if(theme === 'Theme3' || theme === 'Theme2'){
-                        link = classicBase + $j(this).data('id');
-                    }
-                $j(this).prop('href', link);
-            });
-        }
-            
-        function bindEditLinks(){
-            var $j = jQuery.noConflict();
-            lightningBase = '/one/one.app#/sObject/'; // + /action
-            classicBase = '/';
-            mobileBase = '/one/one.app#/sObject/'; // + /action
-            var link = '';
-            $j('.dynamicEditLink').each(function(){
-                link = '';
-                if(theme === 'Theme4d'){
-                    link = lightningBase + $j(this).data('id') + '/edit';
-                }
-                else if(theme === 'Theme4t'){
-                    link = mobileBase + $j(this).data('id')  + '/edit';
-                    $j('a').removeAttr('target');
-                }
-                else if(theme === 'Theme3' || theme === 'Theme2'){
-                    link = classicBase + $j(this).data('id') + '/e';
-                }
-                $j(this).prop('href', link);
-            });
-        }
-    </script>
 </apex:page>
