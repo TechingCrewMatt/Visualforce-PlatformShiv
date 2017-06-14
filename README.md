@@ -1,6 +1,8 @@
 # Visualforce-PlatformShiv
 Easily create Visualforce pages that are compatible with Salesforce Classic, Salesforce1, and Lightning Experience
 
+The unmanaged package can be downloaded directly into Salesforce at https://goo.gl/YOm4Y0. Otherwise, the manual installation instructions are below.
+
 Instructions:
 
 1. Download the PlatformShivJSBundle.zip.
