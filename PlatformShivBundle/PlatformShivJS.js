@@ -25,10 +25,13 @@ SOFTWARE.
 /*********************************************************
  ** TechingCrew LLC                                     **
  ** Certified Salesforce Developers and Administrators  **
- ** TechingCrew.com                                     **
+ ** http://www.TechingCrew.com                                     **
  *********************************************************
 */
 var $j = jQuery.noConflict();
+var lightningBase = '/lightning/'; // + type/Object/Id/action
+var classicBase = '/';
+var mobileBase = '/lightning/'; // + type/Object/Id/action 
 var PlatformShivJS= {
     init: function(theme){
         switch(theme){
@@ -37,12 +40,16 @@ var PlatformShivJS= {
                 $j('.notLightning').addClass('hide');
                 $j('.mobileOnly').addClass('hide');
                 $j('.classicOnly').addClass('hide');
+                $j('.onlyMobile').addClass('hide');
+                $j('.onlyClassic').addClass('hide');
                 break;
             case 'Theme4t':
                 console.log('Salesforce1 Detected');
                 $j('.notMobile').addClass('hide');
                 $j('.lightningOnly').addClass('hide');
                 $j('.classicOnly').addClass('hide');
+                $j('.onlyLightning').addClass('hide');
+                $j('.onlyClassic').addClass('hide');
                 $j('a').removeAttr('target');
                 break;
         
@@ -51,6 +58,8 @@ var PlatformShivJS= {
                 $j('.notClassic').addClass('hide');
                 $j('.lightningOnly').addClass('hide');
                 $j('.mobileOnly').addClass('hide');
+                $j('.onlyLightning').addClass('hide');
+                $j('.onlyMobile').addClass('hide');
         }
         bindViewLinks();
         bindEditLinks();  
@@ -59,44 +68,93 @@ var PlatformShivJS= {
         
 function bindViewLinks(){
     var $j = jQuery.noConflict();
-    lightningBase = '/one/one.app#/sObject/'; // + /action
-    classicBase = '/';
-    mobileBase = '/one/one.app#/sObject/'; // + /action
     var link = '';
-    $j('.dynamicViewLink').each(function(){
+    var id = '';
+    var type = '';
+    var link = '';
+    $j('.viewLink').each(function () {
+        var thisEl = $j(this);
+        id = thisEl.data('id');
+        console.log(id);
+        if (!!id && id !== '' && id !== 'home') {
+            type = 'r/';
+        }
+        else {
+            type = 'o/';
+        }
         link = '';
-        if(theme === 'Theme4d'){
-            link = lightningBase + $j(this).data('id') + '/view';
+        switch (theme) {
+            case 'Theme4d':
+                if (type == 'r/') {
+                    link = lightningBase + type + thisEl.data('object') + '/' + thisEl.data('id') + '/view';
+                }
+                else if (type == 'o/') {
+                    link = lightningBase + type + thisEl.data('object') + '/home';
+                }
+                break;
+            case 'Theme4t':
+                if (type == 'r/') {
+                    link = mobileBase + type + thisEl.data('object') + '/' + thisEl.data('id') + '/view';
+                }
+                else if (type == 'o/') {
+                    link = lightningBase + type + thisEl.data('object') + '/home';
+                }
+                $j('a').removeAttr('target');
+                break;
+            case 'Theme3' || theme === 'Theme2':
+                link = classicBase + thisEl.data('id');
+                break;
+            default:
+                link = classicBase + thisEl.data('id');
+                break;
         }
-        else if(theme === 'Theme4t'){
-            link = mobileBase + $j(this).data('id')  + '/view';
-            $j('a').removeAttr('target');
-        }
-            else if(theme === 'Theme3' || theme === 'Theme2'){
-                link = classicBase + $j(this).data('id');
-            }
-        $j(this).prop('href', link);
+        thisEl.prop('href', link);
     });
 }
     
 function bindEditLinks(){
     var $j = jQuery.noConflict();
-    lightningBase = '/one/one.app#/sObject/'; // + /action
-    classicBase = '/';
-    mobileBase = '/one/one.app#/sObject/'; // + /action
     var link = '';
-    $j('.dynamicEditLink').each(function(){
+    var id = '';
+    var type = '';
+    $j('.editLink').each(function () {
         link = '';
-        if(theme === 'Theme4d'){
-            link = lightningBase + $j(this).data('id') + '/edit';
+        id = '';
+        type = '';
+        var thisEl = $j(this);
+        id = thisEl.data('id');
+        console.log(id);
+        if (id && id !== '' && id !== 'home') {
+            type = 'r/';
         }
-        else if(theme === 'Theme4t'){
-            link = mobileBase + $j(this).data('id')  + '/edit';
-            $j('a').removeAttr('target');
+        else {
+            type = 'o/';
         }
-        else if(theme === 'Theme3' || theme === 'Theme2'){
-            link = classicBase + $j(this).data('id') + '/e';
+        switch (theme) {
+            case 'Theme4d':
+                if (type == 'r/') {
+                    link = lightningBase + type + thisEl.data('object') + '/' + thisEl.data('id') + '/edit';
+                }
+                else if (type == 'o/') {
+                    link = lightningBase + type + thisEl.data('object') + '/home';
+                }
+                break;
+            case 'Theme4t':
+                if (type == 'r/') {
+                    link = mobileBase + type + thisEl.data('object') + '/' + thisEl.data('id') + '/edit';
+                }
+                else if (type == 'o/') {
+                    link = lightningBase + type + thisEl.data('object') + '/home';
+                }
+                $j('a').removeAttr('target');
+                break;
+            case 'Theme3' || theme === 'Theme2':
+                link = classicBase + thisEl.data('id');
+                break;
+            default:
+                link = classicBase + thisEl.data('id');
+                break;
         }
-        $j(this).prop('href', link);
+        thisEl.prop('href', link);
     });
 }
