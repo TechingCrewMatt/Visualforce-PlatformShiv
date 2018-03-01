@@ -27,8 +27,21 @@
             text-align:center;
         }
         
-        #btnNew:hover{
+        #btnNew:hover, #btnHome:hover, .btnX:hover, btnY:hover{
             opacity:0.5;
+        }
+        
+        #btnHome{
+            background-color:green;
+            border-radius:5px;
+            color:white;
+            text-decoration:none;
+            font-weight:bold;
+            padding:7px;
+            margin:7px 0 7px 0;
+            display:block;
+            width:200px;
+            text-align:center;
         }
         
         .btnX{
@@ -52,17 +65,13 @@
             border:1px solid blue;
             border-radius:2px;
         }
-        
-        .btnX:hover, btnY:hover{
-            opacity:.5;
-        }
     </style>
-    <div id="code"></div>
     <h1>
         List of Accounts
     </h1>
     <br/>
-    <a href="/001/e?acc2=Pre-Populated Account Name" target="_blank" class="classicOnly" id="btnNew">New Pre-Populated Account</a>
+    <a href="/001/e?acc2=Pre-Populated Account Name" target="_blank" class="onlyClassic" id="btnNew">New Pre-Populated Account</a>
+    <a href="#" data-id="home" data-object="Task" target="_blank" class="notClassic editLink" id="btnHome">Task Home Page</a>
     <table>
         <tr>
             <th>Name</th>
@@ -72,8 +81,8 @@
             <tr>
                 <td>{!a.Name}</td>
                 <td>
-                    <a href="#" data-id="{!a.Id}" target="_blank" class="dynamicViewLink btnX">Details</a>&nbsp; &nbsp; 
-                    <a href="#" data-id="{!a.Id}" target="_blank" class="dynamicEditLink btnY">Edit</a>
+                    <a href="#" data-id="{!a.Id}" data-object="Account" target="_blank" class="viewLink btnX">Details</a>&nbsp; &nbsp; 
+                    <a href="#" data-id="{!a.Id}" data-object="Account" target="_blank" class="editLink btnY">Edit</a>
                 </td>
             </tr>
         </apex:repeat>
